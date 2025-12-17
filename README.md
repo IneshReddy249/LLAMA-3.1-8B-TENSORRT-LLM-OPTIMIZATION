@@ -290,28 +290,8 @@ nsys profile --trace=cuda,nvtx --output=optimized_profile \
 4. **GPU utilization matters** - 58% → 94% drove most of the 3.86x speedup
 5. **Profiling is essential** - Nsight Systems revealed the CPU bottleneck
 
----
-
-## Relevant for Companies Like:
-
-✅ **Baseten** - Model inference infrastructure  
-✅ **BentoML** - ML model serving  
-✅ **Together AI** - LLM inference API  
-✅ **Fireworks AI** - Fast inference platform  
-✅ **Replicate** - ML model deployment  
-✅ **Modal** - Serverless compute for ML
 
 ---
-
-## Contact
-
-**Inesh Tickoo**  
-MS Computer Science | Florida Atlantic University (Dec 2025)  
-📧 itickoo2023@fau.edu  
-🔗 [LinkedIn](https://linkedin.com/in/inesh-tickoo) | [GitHub](https://github.com/ineshtickoo)
 
 **Looking for:** LLM Inference Optimization Engineer roles
 
----
-
-**License:** MIT | **Completed:** December 2024 | **Hardware:** NVIDIA A100 (Shadeform Cloud)
