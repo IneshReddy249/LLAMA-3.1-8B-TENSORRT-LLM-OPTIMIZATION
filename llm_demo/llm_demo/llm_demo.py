@@ -1,6 +1,3 @@
-"""
-LLM Inference Optimization Demo
-"""
 import reflex as rx
 import requests
 import time
