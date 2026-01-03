@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  trtllm:
+    image: nvcr.io/nvidia/tritonserver:24.10-trtllm-python-py3
+    container_name: trtllm-dev
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - HF_TOKEN=${HF_TOKEN}
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    command: sleep infinity
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
