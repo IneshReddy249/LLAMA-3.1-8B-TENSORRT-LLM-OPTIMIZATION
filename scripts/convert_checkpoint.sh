@@ -1,9 +1,10 @@
 #!/bin/bash
-set -e
+# Convert HuggingFace Llama 3.1 8B to TensorRT-LLM checkpoint
 
-python3 convert_checkpoint.py \
-    --model_dir /home/shadeform/llama-trt-optimization/models/llama-3.1-8b-instruct \
-    --output_dir /home/shadeform/llama-trt-optimization/engines/optimized/checkpoint \
-    --dtype float16 \
-    --use_weight_only \
-    --weight_only_precision int8
+MODEL_DIR="/workspace/models/llama-3.1-8b-instruct"
+OUTPUT_DIR="/workspace/models/llama-3.1-8b-checkpoint"
+
+python3 /opt/TensorRT-LLM-examples/llama/convert_checkpoint.py \
+    --model_dir $MODEL_DIR \
+    --output_dir $OUTPUT_DIR \
+    --dtype float16
