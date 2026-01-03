@@ -101,19 +101,6 @@ EOF
 ### 5. FP8 Quantization
 
 ```bash
-pip install datasets
-
-# Create calibration dataset
-python3 << 'EOF'
-from datasets import load_dataset
-import json
-dataset = load_dataset("cnn_dailymail", "3.0.0", split="train[:512]")
-calib_data = [{"text": article[:2000]} for article in dataset["article"]]
-with open("/workspace/calib_data.json", "w") as f:
-    json.dump(calib_data, f)
-print(f"Created {len(calib_data)} calibration samples")
-EOF
-
 # Quantize to FP8
 python3 /opt/TensorRT-LLM-examples/quantization/quantize.py \
   --model_dir /workspace/models/llama-3.1-8b-instruct \
