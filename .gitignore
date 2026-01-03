@@ -1,36 +1,19 @@
-# Python / OS junk
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.log
-*.tmp
-.venv/
-.env
-.DS_Store
-
-# Editors
-.vscode/
-.idea/
-
-# Big artifacts (NEVER commit)
 models/
 engines/
-triton_model_repo/
-
-# Nsight artifacts (NEVER commit)
-*.nsys-rep
-*.sqlite
-
-# Results: ignore everything by default, allow only curated outputs
-results/*
-!results/PERFORMANCE_REPORT.md
-!results/executive_summary.png
-!results/performance_comparison.png
-!results/triton_scaling.png
-!results/ttft_percentiles.png
-
-# Keep Triton config only (no engine blobs)
-!triton_model_repo/
-!triton_model_repo/tensorrt_llm/
-!triton_model_repo/tensorrt_llm/config.pbtxt
+tokenizer/
+*.engine
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.log
+__pycache__/
+*.pyc
+.venv/
+venv/
+.web/
+.reflex/
+.states/
+.vscode/
+.idea/
+.DS_Store
