@@ -42,7 +42,6 @@ class State(rx.State):
         self.tokens = 0
         self.latency_s = 0.0
         yield
-
         assistant_msg = ""
         try:
             msgs = [{"role": m.role, "content": m.content} for m in self.messages]
@@ -65,7 +64,7 @@ class State(rx.State):
                                         self.tokens = metrics["tokens"]
                                     if "latency_s" in metrics:
                                         self.latency_s = metrics["latency_s"]
-                                    
+                                   
                                     if self.messages and self.messages[-1].role == "assistant":
                                         self.messages = self.messages[:-1] + [Message(role="assistant", content=assistant_msg)]
                                     else:
@@ -123,6 +122,15 @@ def index():
                     rx.text("🚀 TensorRT-LLM Chat", font_size="28px", font_weight="800", color="white"),
                     rx.text("Llama 3.1 8B Instruct | H100 PCIe", font_size="14px", color="#10b981", font_weight="600", margin_top="4px"),
                     rx.text("FP8 • KV Cache • FlashAttention • In-flight Batching", font_size="12px", color="#666", margin_top="6px"),
+                    rx.text(
+                        "Built with Jaseci Labs Agent Architecture",
+                        font_size="12px",
+                        color="#666",
+                        margin_top="6px",
+                        as_="a",
+                        href="https://www.jaseci.org/",
+                        target="_blank",
+                    ),
                     text_align="center",
                     flex="1",
                 ),
@@ -213,59 +221,3 @@ def index():
 
 app = rx.App(theme=rx.theme(appearance="dark"))
 app.add_page(index, title="TensorRT-LLM Chat")
-```
-
----
-
-### File 8: `triton_model_repo/tensorrt_llm/config.pbtxt`
-
-**Path:** `triton_model_repo/tensorrt_llm/config.pbtxt`
-```
-name: "tensorrt_llm"
-backend: "tensorrtllm"
-max_batch_size: 16
-
-model_transaction_policy {
-  decoupled: true
-}
-
-input [
-  { name: "input_ids", data_type: TYPE_INT32, dims: [-1] },
-  { name: "input_lengths", data_type: TYPE_INT32, dims: [1] },
-  { name: "request_output_len", data_type: TYPE_INT32, dims: [1] },
-  { name: "streaming", data_type: TYPE_BOOL, dims: [1] },
-  { name: "end_id", data_type: TYPE_INT32, dims: [1], optional: true },
-  { name: "pad_id", data_type: TYPE_INT32, dims: [1], optional: true }
-]
-
-output [
-  { name: "output_ids", data_type: TYPE_INT32, dims: [-1, -1] },
-  { name: "sequence_length", data_type: TYPE_INT32, dims: [-1] }
-]
-
-instance_group [{ count: 1, kind: KIND_GPU }]
-
-parameters {
-  key: "gpt_model_type"
-  value: { string_value: "inflight_fused_batching" }
-}
-parameters {
-  key: "gpt_model_path"
-  value: { string_value: "/workspace/triton_model_repo/tensorrt_llm/1" }
-}
-parameters {
-  key: "max_beam_width"
-  value: { string_value: "1" }
-}
-parameters {
-  key: "batching_type"
-  value: { string_value: "inflight_fused_batching" }
-}
-parameters {
-  key: "kv_cache_free_gpu_mem_fraction"
-  value: { string_value: "0.85" }
-}
-parameters {
-  key: "enable_chunked_context"
-  value: { string_value: "true" }
-}
