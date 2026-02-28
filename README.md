@@ -39,6 +39,7 @@ Production-ready LLM inference with **Llama 3.1 8B** on **NVIDIA H100** achievin
 | Frontend | Reflex |
 | Container | nvcr.io/nvidia/tritonserver:24.10-trtllm-python-py3 |
 | GPU | NVIDIA H100 PCIe 80GB |
+| **AGENTIC ARCHITECTURE** | Jaseci Labs(jac) |
 
 ---
 
